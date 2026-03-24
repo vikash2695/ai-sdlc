@@ -1,0 +1,16 @@
+{
+  "name": "ai-sdlc",
+  "version": "0.1.0",
+  "description": "Silent BMAD core+SDLC installer with BharatPe overlays",
+  "bin": {
+    "ai-sdlc": "bin/ai-sdlc.js"
+  },
+  "type": "commonjs",
+  "keywords": [
+    "bmad",
+    "sdlc",
+    "cursor",
+    "installer"
+  ],
+  "license": "MIT"
+}

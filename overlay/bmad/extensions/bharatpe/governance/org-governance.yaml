@@ -1,0 +1,32 @@
+# Organization-wide governance catalog.
+# Keep this file central and versioned for all teams.
+
+governance:
+  teams:
+    consumer:
+      jira_project_key: SCRUM
+      confluence_space_key: SD
+      stage_approvals:
+        brd:
+          business:
+            required: true
+            approvers:
+              - vikash2695@gmail.com
+        prd:
+          business:
+            required: true
+            approvers:
+              - vikash.dwivedi@bharatpemoney.com
+          product:
+            required: true
+            approvers:
+              - vikash.dwivedi@bharatpemoney.com
+        dev:
+          tech:
+            required: true
+            approvers:
+              - vikash.dwivedi@bharatpemoney.com
+          team:
+            required: true
+            approvers:
+              - vikash.dwivedi@bharatpemoney.com

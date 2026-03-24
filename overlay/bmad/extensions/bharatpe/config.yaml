@@ -1,0 +1,47 @@
+mcp:
+  jira: required
+  confluence: required
+  figma: optional
+  github: optional
+
+memory:
+  base_path: ./bmad/extensions/bharatpe/memory
+  per_jira_directory: true
+  required_files:
+    - prd.md
+    - architecture.md
+    - context_summary.md
+    - decisions.md
+
+rules:
+  fail_fast: true
+  require_repo: true
+  require_mcp: true
+  require_auth: true
+  source_of_truth:
+    - jira
+    - confluence
+
+governance:
+  # Workspace-level team identity used by wrapper flows.
+  # This repo is shared; each developer machine sets its own active_team.
+  active_team: consumer
+  default_team: consumer
+  org_governance_file: ./bmad/extensions/bharatpe/governance/org-governance.yaml
+  stages:
+    brd:
+      must_publish_to_confluence: true
+    prd:
+      requires_brd_link: true
+      requires_brd_business_approval_comment: true
+      required_brd_business_approval_comment_text: "Approved from Business"
+      validate_brd_business_approval_commenter_allowlist: true
+      brd_business_approval_allowlist_path: "governance.teams.<team>.stage_approvals.brd.business.approvers"
+      must_publish_to_confluence: true
+    architecture:
+      requires_prd_link: true
+      must_publish_to_confluence: true
+    jira:
+      must_include_prd_arch_links: true
+    dev:
+      requires_context_hydration: true
