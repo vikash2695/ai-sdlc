@@ -14,14 +14,27 @@ Enforce stage gates for BRD -> PRD -> Architecture -> Jira -> Dev with fail-fast
 ### BRD
 - Output must be published to Confluence.
 - Local-only BRD output is not allowed.
+- Tracker Epic governance starts at BRD:
+  - Create or resolve a single tracker Epic for the initiative.
+  - Initialize tracker in `TODO`, then set status to `BRD_DRAFT` at BRD start.
+  - BRD Confluence page must include tracker Epic reference (`Tracker Epic: <EPIC_KEY_OR_URL>`).
+  - On business sign-off, move tracker status to `BRD_AWAITING_PRODUCT_REVIEW`.
 
 ### PRD
+- Tracker Epic must already exist for the initiative before PRD generation.
+- Source BRD page must already include tracker Epic reference.
+- Tracker status flow for PRD stage:
+  - Before generation handoff: `READY_FOR_PRD`
+  - While PRD drafting: `PRD_DRAFT`
+  - During tech review: `PRD_AWAITING_TECH_REVIEW`
+  - Handoff checkpoint to architecture: `READY_FOR_ARCHITECTURE`
 - `BRD_LINK` must exist and be resolvable.
 - BRD approval evidence is mandatory before PRD generation:
   - A Confluence comment on BRD must have exact text: `Approved from Business`.
   - The comment author email must be allowlisted in `org-governance.yaml -> governance.teams.<team>.stage_approvals.brd.business.approvers`.
   - Do not accept approval from non-allowlisted users, even if the comment text matches.
 - PRD content must include lineage: `Derived From: <BRD_LINK>`.
+- PRD Confluence page must include the same tracker Epic reference carried from BRD.
 - PRD must be published to Confluence.
 - PRD stage approvals must match team allowlist in config:
 - PRD stage approvals must match team allowlist in org governance catalog:
@@ -29,15 +42,26 @@ Enforce stage gates for BRD -> PRD -> Architecture -> Jira -> Dev with fail-fast
   - `Approval - Product: <approver-id-or-email>`
 
 ### Architecture
+- Tracker Epic must already exist for the initiative before Architecture generation.
+- Source PRD page must already include tracker Epic reference.
+- Tracker status flow for Architecture stage:
+  - While architecture drafting: `ARCHITECTURE_DRAFT`
+  - During EM review: `ARCHITECTURE_AWAITING_EM_REVIEW`
+  - On EM acceptance/handoff: `READY_FOR_TECH`
 - `PRD_LINK` must exist and be resolvable.
 - PRD approval evidence is mandatory before Architecture generation:
   - A Confluence comment on PRD must have exact text: `Approved from Product`.
   - The comment author email must be allowlisted in `org-governance.yaml -> governance.teams.<team>.stage_approvals.prd.product.approvers`.
   - Do not accept approval from non-allowlisted users, even if the comment text matches.
 - Architecture content must include lineage: `Derived From: <PRD_LINK>`.
+- Architecture Confluence page must include the same tracker Epic reference carried from PRD/BRD.
 - Architecture must be published to Confluence.
 
 ### Jira (TPM / Story creation)
+- Tracker Epic must already exist before epic/story decomposition.
+- Tracker status flow for Jira stage:
+  - Before decomposition: `READY_FOR_TECH`
+  - After Epic/Story creation: remain in `READY_FOR_TECH` (no additional status required)
 - PRD Product approval evidence is mandatory before Epic/Story creation:
   - A Confluence comment on PRD must have exact text: `Approved from Product`.
   - The comment author email must be allowlisted in `org-governance.yaml -> governance.teams.<team>.stage_approvals.prd.product.approvers`.

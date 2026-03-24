@@ -30,7 +30,26 @@ This folder provides a non-invasive orchestration layer that wraps BMAD core beh
 - Team/project/space/approval matrix is loaded from:
   - `config.yaml -> governance.org_governance_file`
   - default file: `governance/org-governance.yaml`
+- Tracker Epic routing for AI SDLC governance is independent:
+  - `config.yaml -> governance.tracker_epic_jira_project_key` (recommended: `SDLC`)
+- Delivery/development work remains team-routed (for example `SCRUM`).
 - Jira issue description does not need team metadata.
+
+### SDLC Tracker Epic (assignment source of truth)
+- Create one tracker Epic at BRD start and keep it through BRD -> PRD -> Architecture -> TPM.
+- Use tracker Epic assignee + status as the active work bucket (Business/Product/EM/TPM), not Confluence.
+- Required status sequence for distributed teams:
+  - `TODO`
+  - `BRD_DRAFT`
+  - `BRD_AWAITING_PRODUCT_REVIEW`
+  - `READY_FOR_PRD`
+  - `PRD_DRAFT`
+  - `PRD_AWAITING_TECH_REVIEW`
+  - `READY_FOR_ARCHITECTURE`
+  - `ARCHITECTURE_DRAFT`
+  - `ARCHITECTURE_AWAITING_EM_REVIEW`
+  - `READY_FOR_TECH`
+- Keep BRD/PRD/Architecture links on the same tracker Epic for end-to-end traceability and delay analysis.
 
 ### Approval markers (Jira description/comments)
 ```md
@@ -82,3 +101,12 @@ derived_from: <BRD_URL>
 - `/bp-tpm` -> `agents/bp_tpm.md`
 - `/bp-dev` -> `agents/bp_dev.md`
 - `/bp-validate-stage` -> `agents/bp_validate_stage.md`
+
+## Distributed Team Operating Guide
+- Make Jira the assignment/queue system and Confluence the document discussion system.
+- At each handoff, perform both actions atomically:
+  - assign tracker Epic to next role owner
+  - move tracker Epic to the corresponding status
+- Keep review discussions in Confluence comments and summarize key decisions in Jira comments on tracker Epic.
+- Use one-thread-per-question in Confluence comments to avoid parallel ambiguity across time zones.
+- Add SLA labels on tracker Epic (example: `sla-product-48h`, `sla-em-48h`) and monitor breached queues.

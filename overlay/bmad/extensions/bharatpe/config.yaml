@@ -27,25 +27,55 @@ governance:
   # This repo is shared; each developer machine sets its own active_team.
   active_team: consumer
   default_team: consumer
+  # Dedicated Jira project for AI SDLC tracker Epic lifecycle (BRD -> story breakage).
+  # This is separate from team delivery project routing used for dev execution.
+  tracker_epic_jira_project_key: SDLC
   org_governance_file: ./bmad/extensions/bharatpe/governance/org-governance.yaml
   stages:
     brd:
       must_publish_to_confluence: true
+      create_tracker_epic_if_missing: true
+      must_link_tracker_epic_in_confluence_page: true
+      tracker_epic_reference_label: "Tracker Epic"
+      tracker_issue_type: "Epic"
+      tracker_status_initial: "TODO"
+      tracker_status_on_start: "BRD_DRAFT"
+      tracker_status_on_business_approval: "BRD_AWAITING_PRODUCT_REVIEW"
+      tracker_status_on_handoff_to_product: "BRD_AWAITING_PRODUCT_REVIEW"
     prd:
+      requires_tracker_epic: true
+      requires_tracker_epic_link_in_source_confluence_page: true
+      must_link_tracker_epic_in_confluence_page: true
       requires_brd_link: true
       requires_brd_business_approval_comment: true
       required_brd_business_approval_comment_text: "Approved from Business"
       validate_brd_business_approval_commenter_allowlist: true
       brd_business_approval_allowlist_path: "governance.teams.<team>.stage_approvals.brd.business.approvers"
+      tracker_status_on_brd_product_acceptance: "READY_FOR_PRD"
+      tracker_status_on_ready: "READY_FOR_PRD"
+      tracker_status_on_start: "PRD_DRAFT"
+      tracker_status_on_product_approval: "PRD_AWAITING_TECH_REVIEW"
+      tracker_status_on_tech_review: "PRD_AWAITING_TECH_REVIEW"
+      tracker_status_on_tech_acceptance: "READY_FOR_ARCHITECTURE"
+      tracker_status_on_handoff_to_architecture: "READY_FOR_ARCHITECTURE"
       must_publish_to_confluence: true
     architecture:
+      requires_tracker_epic: true
+      requires_tracker_epic_link_in_source_confluence_page: true
+      must_link_tracker_epic_in_confluence_page: true
       requires_prd_link: true
       requires_prd_product_approval_comment: true
       required_prd_product_approval_comment_text: "Approved from Product"
       validate_prd_product_approval_commenter_allowlist: true
       prd_product_approval_allowlist_path: "governance.teams.<team>.stage_approvals.prd.product.approvers"
+      tracker_status_on_start: "ARCHITECTURE_DRAFT"
+      tracker_status_on_em_review: "ARCHITECTURE_AWAITING_EM_REVIEW"
+      tracker_status_on_em_approval: "READY_FOR_TECH"
+      tracker_status_on_handoff_to_tpm: "READY_FOR_TECH"
       must_publish_to_confluence: true
     jira:
+      requires_tracker_epic: true
+      tracker_status_on_completion: "READY_FOR_TECH"
       must_include_prd_arch_links: true
       requires_prd_product_approval_comment: true
       required_prd_product_approval_comment_text: "Approved from Product"
