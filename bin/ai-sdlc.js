@@ -31,7 +31,7 @@ function printHelp() {
     [
       "Usage: ai-sdlc [options]",
       "",
-      "Installs BMAD core + BMAD SDLC module in silent mode,",
+      "Installs BMAD core + BMAD SDLC module in normal mode,",
       "then applies BharatPe extension and command customizations.",
       "",
       "Options:",
@@ -61,7 +61,7 @@ function runBmadInstall(targetDir) {
   ];
 
   const result = spawnSync(npxBin, args, {
-    stdio: "ignore"
+    stdio: "inherit"
   });
 
   if (result.status !== 0) {
@@ -98,7 +98,7 @@ function main() {
   const targetDir = path.resolve(args.directory);
   ensureDirectory(targetDir);
 
-  process.stdout.write("Installing BMAD core + SDLC module (silent mode)...\n");
+  process.stdout.write("Installing BMAD core + SDLC module (normal mode)...\n");
   runBmadInstall(targetDir);
   process.stdout.write("Applying ai-sdlc overlays...\n");
   copyOverlay(targetDir);

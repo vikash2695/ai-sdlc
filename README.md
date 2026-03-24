@@ -6,7 +6,7 @@ Single-command installer for BMAD SDLC workspaces with BharatPe extension overla
 
 Running `npx ai-sdlc` will:
 
-1. Install BMAD in silent/non-interactive mode.
+1. Install BMAD in normal output mode (non-interactive defaults).
 2. Install BMAD core + BMAD SDLC module (`core,bmm`).
 3. Keep all other BMAD inputs as defaults.
 4. Apply BharatPe extension and Cursor command customizations on top.
@@ -30,7 +30,7 @@ npx ai-sdlc --directory /path/to/workspace
 
 ## Notes
 
-- The installer intentionally suppresses BMAD CLI output for a quiet setup.
+- BMAD installer output is shown so setup steps are visible while debugging.
 - If BMAD installation fails, rerun manually with:
 
 ```bash
