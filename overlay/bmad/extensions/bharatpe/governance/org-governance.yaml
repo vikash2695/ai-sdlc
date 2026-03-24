@@ -21,7 +21,16 @@ governance:
             required: true
             approvers:
               - vikash.dwivedi@bharatpemoney.com
+        architecture:
+          em:
+            required: true
+            approvers:
+              - vikash.dwivedi@bharatpemoney.com
         dev:
+          em:
+            required: true
+            approvers:
+              - vikash.dwivedi@bharatpemoney.com
           tech:
             required: true
             approvers:

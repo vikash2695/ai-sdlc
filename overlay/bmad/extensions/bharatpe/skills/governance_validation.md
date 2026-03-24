@@ -30,10 +30,22 @@ Enforce stage gates for BRD -> PRD -> Architecture -> Jira -> Dev with fail-fast
 
 ### Architecture
 - `PRD_LINK` must exist and be resolvable.
+- PRD approval evidence is mandatory before Architecture generation:
+  - A Confluence comment on PRD must have exact text: `Approved from Product`.
+  - The comment author email must be allowlisted in `org-governance.yaml -> governance.teams.<team>.stage_approvals.prd.product.approvers`.
+  - Do not accept approval from non-allowlisted users, even if the comment text matches.
 - Architecture content must include lineage: `Derived From: <PRD_LINK>`.
 - Architecture must be published to Confluence.
 
 ### Jira (TPM / Story creation)
+- PRD Product approval evidence is mandatory before Epic/Story creation:
+  - A Confluence comment on PRD must have exact text: `Approved from Product`.
+  - The comment author email must be allowlisted in `org-governance.yaml -> governance.teams.<team>.stage_approvals.prd.product.approvers`.
+  - Do not accept approval from non-allowlisted users, even if the comment text matches.
+- Architecture EM approval evidence is mandatory before Epic/Story creation:
+  - A Confluence comment on Architecture must have exact text: `Architecture Approved for implmentation`.
+  - The comment author email must be allowlisted in `org-governance.yaml -> governance.teams.<team>.stage_approvals.architecture.em.approvers`.
+  - Do not accept approval from non-allowlisted users, even if the comment text matches.
 - Every created Epic/Story must include:
   - `PRD` Confluence link
   - `Architecture` Confluence link
@@ -41,7 +53,10 @@ Enforce stage gates for BRD -> PRD -> Architecture -> Jira -> Dev with fail-fast
 
 ### Dev
 - Jira issue must include PRD + Architecture links.
-- Jira must contain comment exactly: `Architecture - Approved by EM`.
+- Jira EM approval evidence is mandatory before dev execution:
+  - A Jira comment on the issue must have exact text: `Approved for Development`.
+  - The comment author email must be allowlisted in `org-governance.yaml -> governance.teams.<team>.stage_approvals.dev.em.approvers`.
+  - Do not accept approval from non-allowlisted users, even if the comment text matches.
 - Issue must be assigned to the MCP-connected user.
 - Issue must be moved to `In Progress` before dev execution.
 - Hydration files must exist before base dev agent invocation.

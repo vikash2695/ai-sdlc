@@ -49,6 +49,24 @@ Approval evidence is read primarily from Jira comments (author identity + approv
 - Approval is valid only when commenter email exists in `governance/org-governance.yaml -> governance.teams.<team>.stage_approvals.brd.business.approvers`.
 - Wrapper must fail fast if this comment is missing.
 
+### PRD -> Architecture gate
+- Architecture generation requires PRD approval evidence in Confluence comments.
+- Required approval comment text on PRD: `Approved from Product`.
+- Approval is valid only when commenter email exists in `governance/org-governance.yaml -> governance.teams.<team>.stage_approvals.prd.product.approvers`.
+- Wrapper must fail fast if this comment is missing.
+
+### Jira -> Dev gate
+- Dev execution requires Jira approval evidence from team-defined EM reviewers.
+- Required approval comment text on Jira: `Approved for Development`.
+- Approval is valid only when commenter email exists in `governance/org-governance.yaml -> governance.teams.<team>.stage_approvals.dev.em.approvers`.
+- Wrapper must fail fast if this comment is missing.
+
+### PRD + Architecture -> Jira gate
+- Epic/Story creation requires approvals on source Confluence documents.
+- Required PRD comment text: `Approved from Product` (author must be in `governance.teams.<team>.stage_approvals.prd.product.approvers`).
+- Required Architecture comment text: `Architecture Approved for implmentation` (author must be in `governance.teams.<team>.stage_approvals.architecture.em.approvers`).
+- Wrapper must fail fast before story breaking if either approval is missing.
+
 ### Metadata block
 ```md
 ---

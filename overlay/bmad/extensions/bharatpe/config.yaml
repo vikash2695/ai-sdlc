@@ -40,8 +40,24 @@ governance:
       must_publish_to_confluence: true
     architecture:
       requires_prd_link: true
+      requires_prd_product_approval_comment: true
+      required_prd_product_approval_comment_text: "Approved from Product"
+      validate_prd_product_approval_commenter_allowlist: true
+      prd_product_approval_allowlist_path: "governance.teams.<team>.stage_approvals.prd.product.approvers"
       must_publish_to_confluence: true
     jira:
       must_include_prd_arch_links: true
+      requires_prd_product_approval_comment: true
+      required_prd_product_approval_comment_text: "Approved from Product"
+      validate_prd_product_approval_commenter_allowlist: true
+      prd_product_approval_allowlist_path: "governance.teams.<team>.stage_approvals.prd.product.approvers"
+      requires_architecture_em_approval_comment: true
+      required_architecture_em_approval_comment_text: "Architecture Approved for implmentation"
+      validate_architecture_em_approval_commenter_allowlist: true
+      architecture_em_approval_allowlist_path: "governance.teams.<team>.stage_approvals.architecture.em.approvers"
     dev:
       requires_context_hydration: true
+      requires_em_approval_comment: true
+      required_em_approval_comment_text: "Approved for Development"
+      validate_em_approval_commenter_allowlist: true
+      em_approval_allowlist_path: "governance.teams.<team>.stage_approvals.dev.em.approvers"

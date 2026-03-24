@@ -12,6 +12,8 @@
 2. Validate Dev-stage team routing and approvals:
    - Jira board/project matches mapped team
    - Tech + Team approvals match team allowlist
+   - Jira comment text check: `Approved for Development`
+   - Jira EM approval commenter identity check against team EM allowlist
 3. Run context hydration for `JIRA_ID`.
 4. Load hydrated context files:
    - `context_summary.md`
@@ -30,6 +32,8 @@
 
 ## Rule Enforcement
 - Fail if Jira does not contain PRD and Architecture links.
+- Fail if Jira does not include the required EM approval comment: `Approved for Development`.
+- Fail if Jira EM approval comment author is not in org governance EM approver allowlist.
 - Fail if team routing or approval validation fails.
 - Fail if hydration does not complete.
 - Do not execute base dev agent without hydrated context.

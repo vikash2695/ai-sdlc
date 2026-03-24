@@ -24,6 +24,17 @@ Run governance checks only. Do not generate documents, do not invoke dev agent, 
    - For `prd` stage, include BRD business-approval checks:
      - comment text: `Approved from Business`
      - comment author email in org governance business approver allowlist
+   - For `architecture` stage, include PRD product-approval checks:
+     - comment text: `Approved from Product`
+     - comment author email in org governance product approver allowlist
+   - For `jira` stage, include pre-story-creation checks:
+     - PRD comment text: `Approved from Product`
+     - PRD comment author email in org governance product approver allowlist
+     - Architecture comment text: `Architecture Approved for implmentation`
+     - Architecture comment author email in org governance EM approver allowlist
+   - For `dev` stage, include Jira EM approval checks:
+     - comment text: `Approved for Development`
+     - comment author email in org governance EM approver allowlist
 5. Return a structured report:
    - `stage`
    - `status: pass | fail`
