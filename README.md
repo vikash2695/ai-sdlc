@@ -8,9 +8,10 @@ Running `npx ai-sdlc` will:
 
 1. Install BMAD in normal output mode (non-interactive defaults).
 2. Install BMAD `6.2.0` core + BMAD SDLC module (`core,bmm`).
-3. Keep all other BMAD inputs as defaults.
-4. Apply BharatPe extension and Cursor command customizations on top.
-5. Validate `_bmad/_config/manifest.yaml` contains both `core` and `bmm`.
+3. Configure IDE as Cursor (`--tools cursor`).
+4. Keep all other BMAD inputs as defaults.
+5. Apply BharatPe extension and Cursor command customizations on top.
+6. Validate `_bmad/_config/manifest.yaml` contains both `core` and `bmm`.
 
 ## Usage
 

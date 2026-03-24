@@ -58,6 +58,8 @@ function runBmadInstall(targetDir) {
     targetDir,
     "--modules",
     "core,bmm",
+    "--tools",
+    "cursor",
     "-y"
   ];
 
