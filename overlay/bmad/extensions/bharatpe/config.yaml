@@ -36,6 +36,7 @@ governance:
       must_publish_to_confluence: true
       create_tracker_epic_if_missing: true
       must_link_tracker_epic_in_confluence_page: true
+      tracker_epic_reference_must_be_full_url: true
       tracker_epic_reference_label: "Tracker Epic"
       tracker_issue_type: "Epic"
       tracker_status_initial: "TODO"
@@ -44,6 +45,9 @@ governance:
       tracker_status_on_handoff_to_product: "BRD_AWAITING_PRODUCT_REVIEW"
     prd:
       requires_tracker_epic: true
+      tracker_epic_input_optional_if_present_in_brd: true
+      resolve_tracker_epic_from_brd_link: true
+      fail_if_tracker_epic_unresolved_from_brd: true
       requires_tracker_epic_link_in_source_confluence_page: true
       must_link_tracker_epic_in_confluence_page: true
       requires_brd_link: true
@@ -61,6 +65,9 @@ governance:
       must_publish_to_confluence: true
     architecture:
       requires_tracker_epic: true
+      tracker_epic_input_optional_if_present_in_prd: true
+      resolve_tracker_epic_from_prd_link: true
+      fail_if_tracker_epic_unresolved_from_prd: true
       requires_tracker_epic_link_in_source_confluence_page: true
       must_link_tracker_epic_in_confluence_page: true
       requires_prd_link: true

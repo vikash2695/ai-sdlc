@@ -1,7 +1,8 @@
 Dispatch to the BharatPe Architecture wrapper agent.
 
 **Load:** `bmad/extensions/bharatpe/agents/bp_arch.md`
-**Requires:** `PRD_LINK`, `TRACKER_EPIC_ID`
+**Requires:** `PRD_LINK`  
+**Optional:** `TRACKER_EPIC_ID` (resolved from PRD page tracker reference when omitted)
 
 Execution contract:
 - Treat the loaded agent as the single source of truth for architecture workflow and gates.

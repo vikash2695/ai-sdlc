@@ -17,7 +17,8 @@ Enforce stage gates for BRD -> PRD -> Architecture -> Jira -> Dev with fail-fast
 - Tracker Epic governance starts at BRD:
   - Create or resolve a single tracker Epic for the initiative.
   - Initialize tracker in `TODO`, then set status to `BRD_DRAFT` at BRD start.
-  - BRD Confluence page must include tracker Epic reference (`Tracker Epic: <EPIC_KEY_OR_URL>`).
+  - BRD Confluence page must include tracker Epic reference as a full URL link (`Tracker Epic: [<EPIC_KEY>](<JIRA_BROWSE_URL>)`).
+  - Key-only tracker references (for example `Tracker Epic: SDLC-3`) are invalid.
   - On business sign-off, move tracker status to `BRD_AWAITING_PRODUCT_REVIEW`.
 
 ### PRD
@@ -43,7 +44,7 @@ Enforce stage gates for BRD -> PRD -> Architecture -> Jira -> Dev with fail-fast
 
 ### Architecture
 - Tracker Epic must already exist for the initiative before Architecture generation.
-- Source PRD page must already include tracker Epic reference.
+- Source PRD page must already include tracker Epic reference (parse key or full Jira URL from PRD when `TRACKER_EPIC_ID` is not supplied; if both are supplied, they must match).
 - Tracker status flow for Architecture stage:
   - While architecture drafting: `ARCHITECTURE_DRAFT`
   - During EM review: `ARCHITECTURE_AWAITING_EM_REVIEW`
