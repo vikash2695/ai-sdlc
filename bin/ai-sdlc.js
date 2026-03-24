@@ -3,6 +3,7 @@
 const fs = require("fs");
 const path = require("path");
 const { spawnSync } = require("child_process");
+const BMAD_VERSION = "6.2.0";
 
 function parseArgs(argv) {
   const parsed = {
@@ -51,7 +52,7 @@ function runBmadInstall(targetDir) {
   const npxBin = process.platform === "win32" ? "npx.cmd" : "npx";
   const args = [
     "-y",
-    "bmad-method",
+    `bmad-method@${BMAD_VERSION}`,
     "install",
     "--directory",
     targetDir,
@@ -66,11 +67,36 @@ function runBmadInstall(targetDir) {
 
   if (result.status !== 0) {
     throw new Error(
-      "BMAD install failed. Please run `npx -y bmad-method install --directory \"" +
+      "BMAD install failed. Please run `npx -y bmad-method@" +
+        BMAD_VERSION +
+        " install --directory \"" +
         targetDir +
         "\" --modules core,bmm -y` manually to inspect details."
     );
   }
+}
+
+function validateRequiredModules(targetDir) {
+  const manifestPath = path.join(targetDir, "_bmad", "_config", "manifest.yaml");
+  if (!fs.existsSync(manifestPath)) {
+    throw new Error(
+      "BMAD manifest not found at `" +
+        manifestPath +
+        "`. Installation may be incomplete."
+    );
+  }
+
+  const manifestContent = fs.readFileSync(manifestPath, "utf8");
+  const hasCore = /-\s+name:\s+core\b/.test(manifestContent);
+  const hasBmm = /-\s+name:\s+bmm\b/.test(manifestContent);
+
+  if (!hasCore || !hasBmm) {
+    throw new Error(
+      "Required modules missing in manifest. Expected both `core` and `bmm`."
+    );
+  }
+
+  process.stdout.write("Verified modules: core + bmm\n");
 }
 
 function copyOverlay(targetDir) {
@@ -98,8 +124,13 @@ function main() {
   const targetDir = path.resolve(args.directory);
   ensureDirectory(targetDir);
 
-  process.stdout.write("Installing BMAD core + SDLC module (normal mode)...\n");
+  process.stdout.write(
+    "Installing BMAD core + SDLC module (normal mode), pinned to v" +
+      BMAD_VERSION +
+      "...\n"
+  );
   runBmadInstall(targetDir);
+  validateRequiredModules(targetDir);
   process.stdout.write("Applying ai-sdlc overlays...\n");
   copyOverlay(targetDir);
   process.stdout.write("Setup complete. Workspace is ready.\n");

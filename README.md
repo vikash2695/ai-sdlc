@@ -7,9 +7,10 @@ Single-command installer for BMAD SDLC workspaces with BharatPe extension overla
 Running `npx ai-sdlc` will:
 
 1. Install BMAD in normal output mode (non-interactive defaults).
-2. Install BMAD core + BMAD SDLC module (`core,bmm`).
+2. Install BMAD `6.2.0` core + BMAD SDLC module (`core,bmm`).
 3. Keep all other BMAD inputs as defaults.
 4. Apply BharatPe extension and Cursor command customizations on top.
+5. Validate `_bmad/_config/manifest.yaml` contains both `core` and `bmm`.
 
 ## Usage
 
@@ -34,5 +35,5 @@ npx ai-sdlc --directory /path/to/workspace
 - If BMAD installation fails, rerun manually with:
 
 ```bash
-npx -y bmad-method install --directory "<workspace>" --modules core,bmm -y
+npx -y bmad-method@6.2.0 install --directory "<workspace>" --modules core,bmm -y
 ```
