@@ -13,9 +13,9 @@ Build a working dev context from Jira and Confluence, then persist it under per-
 4. Pull PRD and Architecture pages from Confluence.
 5. Create memory directory:
    - `bmad/extensions/bharatpe/memory/<JIRA_ID>/`
-6. Save normalized files:
-   - `prd.md`
-   - `architecture.md`
+6. Save normalized files (**full Confluence page body**, not summaries):
+   - `prd.md` — paste the complete PRD markdown from Confluence (optionally prefix with YAML frontmatter: `jira_issue`, `page_id`, `canonical_url`). **Do not** replace with “story-only” excerpts; implementers need the full MVP scope, FR table, NFRs, and journeys for alignment.
+   - `architecture.md` — same: **complete** architecture page (containers, flows, data model, API list, ADRs).
 7. Generate/update:
    - `context_summary.md`
    - `decisions.md` (create if absent, preserve existing decisions)
